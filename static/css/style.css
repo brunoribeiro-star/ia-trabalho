@@ -4,7 +4,7 @@ body {
     align-items: center;
     height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #000;
     margin: 0;
 }
 
@@ -13,8 +13,18 @@ body {
 }
 
 h1 {
-    font-size: 24px;
-    color: #333;
+    font-size: 32px;
+    color: #004FFF;
+    margin-bottom: 50px;
+}
+
+p {
+    font-size: 18px;
+    color: #fff;
+}
+
+.buttons {
+    margin-top: 50px;
 }
 
 .buttons button {
@@ -24,14 +34,114 @@ h1 {
     cursor: pointer;
 }
 
-#designerBtn {
-    background-color: #8a2be2;
-    color: white;
+#btnDesigner {
+    background-color: #004FFF;
+    color: #fff;
+    padding: 15px 45px;
+    font-weight: bold;
+    border-radius: 100px;
     border: none;
+}
+
+#btnDesigner:hover {
+    background-color: #3675ff;
+}
+
+#btnGestor {
+    background-color: #004FFF;
+    color: #fff;
+    padding: 15px 45px;
+    font-weight: bold;
+    border-radius: 100px;
+    border: none;
+}
+
+#btnGestor:hover {
+    background-color: #3675ff;
 }
 
 .buttons button:hover {
     opacity: 0.9;
+}
+
+h2 {
+    color: #004FFF;
+    font-size: 32px;
+}
+
+input {
+    padding: 15px 45px;
+    border: none;
+    border-radius: 100px;
+    margin: 20px;
+}
+
+#descricaoCores {
+    padding: 15px 45px;
+    border: none;
+    border-radius: 100px;
+}
+
+#gerarPaleta {
+    background-color: #004FFF;
+    color: #fff;
+    padding: 15px 45px;
+    font-weight: bold;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+}
+
+#gerarPaleta:hover {
+    background-color: #3675ff;
+}
+
+#novaPaleta {
+    background-color: #004FFF;
+    color: #fff;
+    padding: 15px 45px;
+    font-weight: bold;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+}
+
+#novaPaleta:hover {
+    background-color: #3675ff;
+}
+
+label {
+    color: #fff;
+    font-size: 18px;
+}
+
+#numCampanhas, #metaCliques, #metaConversoes {
+    padding: 15px 45px;
+    border: none;
+    border-radius: 100px;
+}
+
+#metaCliques, #metaConversoes {
+    margin-top: 50px;
+}
+
+#addCampanhaBtn, #iniciarAnalise {
+    background-color: #004FFF;
+    color: #fff;
+    padding: 15px 45px;
+    font-weight: bold;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+}
+
+#addCampanhaBtn:hover, #iniciarAnalise:hover {
+    background-color: #3675ff;
+}
+
+h3 {
+    color: #fff;
+    font-size: 32px;
 }
 
 .hidden {

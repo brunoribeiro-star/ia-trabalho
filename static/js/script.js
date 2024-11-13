@@ -13,6 +13,7 @@ const iniciarAnaliseBtn = document.getElementById("iniciarAnalise");
 const metaCliquesInput = document.getElementById("metaCliques");
 const metaConversoesInput = document.getElementById("metaConversoes");
 const resultadoAnalise = document.getElementById("resultadoAnalise");
+const numCampanhasInput = document.getElementById("numCampanhas"); // Adicionado
 
 btnDesigner.addEventListener("click", () => {
     paletaForm.classList.remove("hidden");
@@ -25,7 +26,7 @@ btnGestor.addEventListener("click", () => {
     anuncioForm.classList.remove("hidden");
     paletaForm.classList.add("hidden");
     resultadoAnalise.innerHTML = ""; // limpa resultados anteriores
-    numCampanhas.value = ""; // limpa número de campanhas
+    numCampanhasInput.value = ""; // limpa número de campanhas
 });
 
 // Função para gerar paleta de cores
@@ -89,6 +90,7 @@ addCampanhaBtn.addEventListener("click", () => {
 
 // Enviar dados das campanhas para análise
 iniciarAnaliseBtn.addEventListener("click", () => {
+    const numCampanhas = parseInt(numCampanhasInput.value);
     const metaCliques = parseInt(metaCliquesInput.value);
     const metaConversoes = parseInt(metaConversoesInput.value);
 
@@ -113,6 +115,7 @@ iniciarAnaliseBtn.addEventListener("click", () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                numCampanhas: numCampanhas, // Adicionado para o AdOptimizer
                 campanhas: campanhas,
                 metaCliques: metaCliques,
                 metaConversoes: metaConversoes
