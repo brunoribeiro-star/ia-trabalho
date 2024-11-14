@@ -11,10 +11,8 @@ import colorsys
 import warnings
 import re
 
-# Ignorar avisos de divisão por zero
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
-# Função para IA de geração de paleta de cores
 def gerar_paleta_cores(descricao):
     tipo_paleta, cores_base = interpretar_descricao(descricao)
 
@@ -29,7 +27,6 @@ def gerar_paleta_cores(descricao):
     
     return {"paleta": paleta}
 
-# Função para interpretar a descrição do usuário e extrair o tipo de paleta e cores base
 def interpretar_descricao(descricao):
     cores_hex = re.findall(r'#([A-Fa-f0-9]{6})', descricao)
     cores_base = ['#' + cor for cor in cores_hex] if cores_hex else []
@@ -61,15 +58,12 @@ def interpretar_descricao(descricao):
 
     return tipo_paleta, cores_base
 
-# Função para converter hexadecimal para RGB
 def hex_to_rgb(hex_color):
     return mcolors.hex2color(hex_color)
 
-# Função para converter RGB para hexadecimal
 def rgb_to_hex(rgb_color):
     return mcolors.to_hex(rgb_color)
 
-# Funções para geração de paletas
 def gerar_paleta_complementar_aleatoria(cores_base):
     paleta = []
     for cor_base in cores_base:

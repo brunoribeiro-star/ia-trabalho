@@ -18,18 +18,17 @@ const numCampanhasInput = document.getElementById("numCampanhas"); // Adicionado
 btnDesigner.addEventListener("click", () => {
     paletaForm.classList.remove("hidden");
     anuncioForm.classList.add("hidden");
-    resultadoPaleta.innerHTML = ""; // limpa resultados anteriores
-    descricaoCores.value = ""; // limpa descrição
+    resultadoPaleta.innerHTML = "";
+    descricaoCores.value = "";
 });
 
 btnGestor.addEventListener("click", () => {
     anuncioForm.classList.remove("hidden");
     paletaForm.classList.add("hidden");
-    resultadoAnalise.innerHTML = ""; // limpa resultados anteriores
-    numCampanhasInput.value = ""; // limpa número de campanhas
+    resultadoAnalise.innerHTML = "";
+    numCampanhasInput.value = "";
 });
 
-// Função para gerar paleta de cores
 gerarPaletaBtn.addEventListener("click", () => {
     const descricao = descricaoCores.value;
     if (descricao) {
@@ -45,7 +44,7 @@ gerarPaletaBtn.addEventListener("click", () => {
             if (data.paleta) {
                 resultadoPaleta.innerHTML = `<p>Paleta gerada:</p>`;
                 data.paleta.forEach(cor => {
-                    resultadoPaleta.innerHTML += `<div style="background-color: ${cor}; width: 50px; height: 50px; display: inline-block; margin: 2px;"></div>`;
+                    resultadoPaleta.innerHTML += `<div style="background-color: ${cor}; width: 100px; height: 100px; display: inline-block; margin: 2px; color: #fff; text-align: center; line-height: 100px; font-weight: bold;">${cor.toUpperCase()}</div>`;
                 });
                 novaPaletaBtn.classList.remove("hidden");
             } else if (data.error) {
@@ -59,17 +58,14 @@ gerarPaletaBtn.addEventListener("click", () => {
     }
 });
 
-// Botão para gerar uma nova paleta
 novaPaletaBtn.addEventListener("click", () => {
     resultadoPaleta.innerHTML = "";
     novaPaletaBtn.classList.add("hidden");
 });
 
-// Adicionar campos de entrada para cada campanha
 addCampanhaBtn.addEventListener("click", () => {
     const campanhaIndex = campanhasContainer.children.length + 1;
 
-    // Cria uma div para a nova campanha
     const campanhaDiv = document.createElement("div");
     campanhaDiv.classList.add("campanha");
     campanhaDiv.innerHTML = `
@@ -88,13 +84,11 @@ addCampanhaBtn.addEventListener("click", () => {
     campanhasContainer.appendChild(campanhaDiv);
 });
 
-// Enviar dados das campanhas para análise
 iniciarAnaliseBtn.addEventListener("click", () => {
-    const numCampanhas = parseInt(numCampanhasInput.value);
+    const numCampanhas = campanhasContainer.children.length;
     const metaCliques = parseInt(metaCliquesInput.value);
     const metaConversoes = parseInt(metaConversoesInput.value);
 
-    // Coletar dados de cada campanha
     const campanhas = Array.from(campanhasContainer.children).map(campanhaDiv => ({
         gastos: parseFloat(campanhaDiv.querySelector(".gastos").value),
         cliques: parseInt(campanhaDiv.querySelector(".cliques").value),
@@ -108,30 +102,53 @@ iniciarAnaliseBtn.addEventListener("click", () => {
         dispositivo: campanhaDiv.querySelector(".dispositivo").value,
     }));
 
-    if (campanhas.length && metaCliques && metaConversoes) {
-        fetch("/analisar_anuncios", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                numCampanhas: numCampanhas, // Adicionado para o AdOptimizer
-                campanhas: campanhas,
-                metaCliques: metaCliques,
-                metaConversoes: metaConversoes
-            })
+    fetch("/analisar_anuncios", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            campanhas: campanhas,
+            meta_cliques: metaCliques,
+            meta_conversoes: metaConversoes
         })
-        .then(response => response.json())
-        .then(data => {
-            resultadoAnalise.innerHTML = `<p>Resultado da análise:</p>`;
-            resultadoAnalise.innerHTML += `<p>Cliques recomendados: ${data.recomendacaoCliques}</p>`;
-            resultadoAnalise.innerHTML += `<p>Conversões recomendadas: ${data.recomendacaoConversoes}</p>`;
-        })
-        .catch(error => {
-            console.error("Erro ao analisar campanhas:", error);
-            resultadoAnalise.innerHTML = "<p>Erro ao analisar campanhas. Tente novamente.</p>";
-        });
-    } else {
-        alert("Por favor, preencha todos os campos e adicione pelo menos uma campanha.");
-    }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            resultadoAnalise.innerHTML = `<p>${data.error}</p>`;
+        } else {
+            resultadoAnalise.innerHTML = `<p>Gastos totais necessários para atingir as metas: R$ ${data.gastos_totais_necessarios}</p>`;
+            resultadoAnalise.innerHTML += `<p>Gastos recomendados para alcançar ${metaCliques} cliques: R$ ${data.gastos_para_cliques}</p>`;
+            resultadoAnalise.innerHTML += `<p>Gastos recomendados para alcançar ${metaConversoes} conversões: R$ ${data.gastos_para_conversoes}</p>`;
+        }
+    })
+    .catch(error => {
+        console.error("Erro ao analisar campanhas:", error);
+        resultadoAnalise.innerHTML = "<p>Erro ao analisar campanhas. Tente novamente.</p>";
+    });
+});
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const btnDesigner = document.getElementById("btnDesigner");
+    const btnGestor = document.getElementById("btnGestor");
+    const colorizeSection = document.getElementById("colorizeSection");
+    const adOptimizerSection = document.getElementById("adOptimizerSection");
+    const selectionSection = document.getElementById("selectionSection");
+
+    btnDesigner.addEventListener("click", () => {
+        colorizeSection.style.display = "block";
+        adOptimizerSection.style.display = "none";
+        selectionSection.style.display = "none";
+    });
+
+    btnGestor.addEventListener("click", () => {
+        colorizeSection.style.display = "none";
+        adOptimizerSection.style.display = "block";
+        selectionSection.style.display = "none";
+    });
 });

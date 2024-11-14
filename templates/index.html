@@ -11,33 +11,38 @@
         <h1>Bem vindo a nossa dupla de Inteligências Artificiais!</h1>
         <p>Temos o AdOptimizer, para você que é Gestor de Tráfego. E a Colorize, para você que é designer.</p>
         <p>Escolha aqui qual delas você deseja utilizar:</p>
-        <div class="buttons">
+        
+        <div id="selectionSection">
             <button id="btnDesigner">Designer - Colorize</button>
             <button id="btnGestor">Gestor - AdOptimizer</button>
         </div>
 
-        <div id="paletaForm" class="form hidden">
-            <h2>Gerador de Paleta de Cores</h2>
-            <input type="text" id="descricaoCores" placeholder="Descreva o tipo de paleta de cores que deseja">
-            <button id="gerarPaleta">Gerar Paleta</button>
-            <div id="resultadoPaleta"></div>
-            <button id="novaPaleta" class="hidden">Gerar Nova Paleta</button>
+        <div id="colorizeSection" style="display:none;">
+            <div id="paletaForm" class="form hidden">
+                <h2>Gerador de Paleta de Cores</h2>
+                <input type="text" id="descricaoCores" placeholder="Descreva o tipo de paleta de cores que deseja">
+                <button id="gerarPaleta">Gerar Paleta</button>
+                <div id="resultadoPaleta"></div>
+                <button id="novaPaleta" class="hidden">Gerar Nova Paleta</button>
+            </div>
         </div>
 
-        <div id="anuncioForm" class="form hidden">
-            <h2>AdOptimizer - Análise de Anúncios</h2>
+        <div id="adOptimizerSection" style="display:none;">
+            <div id="anuncioForm" class="form hidden">
+                <h2>AdOptimizer - Análise de Anúncios</h2>
+                <label for="numCampanhas">Número de campanhas:</label>
+                <input type="number" id="numCampanhas" placeholder="Número de campanhas" min="1">
+                <button id="addCampanhaBtn">Adicionar Campanha</button>
+                <div id="campanhasContainer"></div>
 
-            <label for="numCampanhas">Número de campanhas:</label>
-            <input type="number" id="numCampanhas" placeholder="Número de campanhas" min="1">
-            <button id="addCampanhaBtn">Adicionar Campanha</button>
+                <label for="metaCliques">Meta de cliques:</label>
+                <input type="number" id="metaCliques" placeholder="Meta de cliques" required>
+                <label for="metaConversoes">Meta de conversões:</label>
+                <input type="number" id="metaConversoes" placeholder="Meta de conversões" required>
 
-            <div id="campanhasContainer"></div>
-
-            <input type="number" id="metaCliques" placeholder="Meta de cliques">
-            <input type="number" id="metaConversoes" placeholder="Meta de conversões">
-
-            <button id="iniciarAnalise">Iniciar Análise</button>
-            <div id="resultadoAnalise"></div>
+                <button id="iniciarAnalise">Iniciar Análise</button>
+                <div id="resultadoAnalise"></div>
+            </div>
         </div>
     </div>
 

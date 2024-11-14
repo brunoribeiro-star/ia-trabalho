@@ -23,17 +23,6 @@ p {
     color: #fff;
 }
 
-.buttons {
-    margin-top: 50px;
-}
-
-.buttons button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 10px;
-    cursor: pointer;
-}
-
 #btnDesigner {
     background-color: #004FFF;
     color: #fff;
@@ -41,6 +30,8 @@ p {
     font-weight: bold;
     border-radius: 100px;
     border: none;
+    cursor: pointer;
+    margin: 50px 20px;
 }
 
 #btnDesigner:hover {
@@ -54,6 +45,7 @@ p {
     font-weight: bold;
     border-radius: 100px;
     border: none;
+    cursor: pointer;
 }
 
 #btnGestor:hover {
@@ -104,6 +96,7 @@ input {
     border-radius: 100px;
     border: none;
     cursor: pointer;
+    margin-top: 50px;
 }
 
 #novaPaleta:hover {
@@ -146,4 +139,16 @@ h3 {
 
 .hidden {
     display: none;
+}
+
+.color-square {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    margin: 2px;
+    color: white;
+    text-align: center;
+    line-height: 100px;
+    font-weight: bold;
+    font-size: 16px;
 }
